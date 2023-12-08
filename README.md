@@ -32,6 +32,7 @@ To get started with Sparta, follow these steps:
 ```bash
 git clone https://github.com/yourusername/sparta.git
 cd sparta
+```
 # Follow specific instructions for setting up the environment
 
 ### Usage
