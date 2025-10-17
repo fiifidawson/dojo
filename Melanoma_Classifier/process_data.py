@@ -132,3 +132,15 @@ print(f"Malignant training count: {len(mal_training_data)}")
 print()
 print(f"Benign testing count: {len(ben_testing_data)}")
 print(f"Malignant testing count: {len(mal_testing_data)}")
+
+
+training_data = ben_training_data + mal_training_data
+np.random.shuffle(training_data)
+np.save("melanoma_training_data.npy",  np.array(training_data, dtype=object))
+
+testing_data = ben_testing_data + mal_testing_data
+np.random.shuffle(testing_data)
+np.save("melanoma_testing_data.npy",  np.array(training_data, dtype=object))
+
+# training_data = np.load("melanoma_training_data.npy", allow_pickle=True)
+# testing_data = np.load("melanoma_testing_data.npy", allow_pickle=True)
