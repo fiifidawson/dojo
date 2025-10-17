@@ -24,5 +24,15 @@ while t[-1] < tend:
 
     rand = random.uniform(0, 1)
 
-    if rand * rate_sum > 0 and rand * rate_sum < rates[0]:
+    # Production event
+    if (rand * rate_sum > 0) and (rand * rate_sum < rates[0]):
         X.append(X[-1] + 1)
+    # Decay event
+    elif (rand * rate_sum > rates[0]) and (rand * rate_sum < rates[0] + rates[1]):
+        X.append(X[-1] - 1)
+
+    
+plt.plot(t, X)
+plt.xlabel("Time")
+plt.ylabel("mRNA Quantity")
+plt.show()
