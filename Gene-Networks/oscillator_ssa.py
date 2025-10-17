@@ -8,7 +8,7 @@ G2 = [0]
 G3 = [0]
 t = [0]
 
-tend = 2000
+tend = 1000
 
 k_1 = 2
 gamma_1 = 0.1
@@ -53,7 +53,7 @@ while t[-1] < tend:
         G3.append(G3[-1])
 
     # G2 production event
-    elif rand * rate_sum > sum(rates[:2] and rand * rate_sum < sum(rates[:3])):
+    elif rand * rate_sum > sum(rates[:2]) and rand * rate_sum < sum(rates[:3]):
         G1.append(G1[-1])
         G2.append(G2[-1] + 1)
         G3.append(G3[-1])
@@ -75,3 +75,16 @@ while t[-1] < tend:
         G1.append(G1[-1])
         G2.append(G2[-1])
         G3.append(G3[-1] - 1)
+
+
+
+F, (ax1, ax2, ax3) = plt.subplots(3, sharex=True, sharey=False)
+
+line1, = ax1.plot(t, G1, color="b", label="G1")
+line2, = ax2.plot(t, G2, color="r", label="G2")
+line3, = ax3.plot(t, G3, color="y", label="G3")
+
+ax1.set_ylabel("Number")
+ax1.set_xlabel("Time")
+ax1.legend(handles=[line1, line2, line3])
+plt.show()
