@@ -12,3 +12,17 @@ def apply_model(path):
     img = cv2.resize(img, (img_size, img_size))
 
     img_array = np.array(img)
+    img_array = img_array / 225
+
+    img_array = torch.Tensor(img_array)
+
+    net = Net()
+    net.load_state_dict(torch.load("model/save_model.pth"))
+
+    net.eval()
+    net_out = net(img_array.view(-1, 1, img_size, img_size))[0]
+
+    if net_out[0] >= net_out[1]:
+        print()
+        print()
+        print("Prediction: BENIGN")
