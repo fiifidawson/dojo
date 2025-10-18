@@ -25,7 +25,7 @@ train_y = torch.Tensor([item[1] for item in training_data])
 net = Net()
 
 # Setting optimizer
-optimizer = optim.Adam(net.parameters,
+optimizer = optim.Adam(net.parameters(),
                        lr=0.001)
 
 # Setting loss function
@@ -35,12 +35,12 @@ loss_function = nn.MSELoss()
 batch_size = 100 # no. of images being processed at once
 
 # Setting epoch
-epochs = 10
+epochs = 2
 for epoch in range(epochs):
     for i in range(0, len(train_X), batch_size):
         print(f"EPOCH {epoch+1} | fraction compplete: {i/len(train_X)}")
 
-        batch_X = train_X[i: i+batch_size].view(-1, img_size, img_size)
+        batch_X = train_X[i: i+batch_size].view(-1, 1, img_size, img_size)
         batch_y = train_y[i: i+batch_size]
 
         # Reset gradients of model parameters to zero before this pass
@@ -48,8 +48,18 @@ for epoch in range(epochs):
 
         outputs = net(batch_X)
 
-        ## real label: [0, 1]
+        
+
+        # Setting loss function: calc loss between predicted outputs and actual image one-hot vector labels
+        loss = loss_function(outputs, batch_y)
+        ## real label(eg): [0, 1]
         ## model guess(eg): [0.34, 0.66]
 
-        # Setting loss function
-        loss = loss_function(outputs, batch_y)
+        # Setting backpropagation: calc gradients of the loss wrt model params
+        loss.backward()
+
+        #  Update the model params based on the recent calculated gradient
+        optimizer.step()
+
+
+torch.save(net.state_dict(), "save_model.pth")
