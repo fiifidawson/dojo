@@ -62,4 +62,4 @@ for epoch in range(epochs):
         optimizer.step()
 
 
-torch.save(net.state_dict(), "save_model.pth")
+torch.save(net.state_dict(), "model/save_model.pth")
