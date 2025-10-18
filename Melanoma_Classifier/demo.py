@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import torch
 from net_class import Net
+import warnings
+warnings.filterwarnings("ignore")
 
 def apply_model(path):
 
@@ -26,3 +28,23 @@ def apply_model(path):
         print()
         print()
         print("Prediction: BENIGN")
+        print(f"Confidence: {round(float(net_out[0]), 3)}")
+        print()
+        print()
+    else:
+        print()
+        print()
+        print("Prediction: MELANOMA")
+        print(f"Confidence: {round(float(net_out[1]), 3)}")
+        print()
+        print()
+
+# Allow running from terminal
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python predict.py <path_to_image>")
+    else:
+        apply_model(sys.argv[1])
+
+# python demo.py melanoma_cancer_dataset/test/benign/melanoma_9609.jpg
