@@ -16,9 +16,6 @@ client = OpenAI(
   api_key=os.getenv("OPENROUTER_API_KEY"),
 )
 
-# open_api_key = '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'
-# openai.api_key = open_api_key
-
 def ask_openai(message):
     response = client.chat.completions.create(
         model="nvidia/nemotron-3-nano-30b-a3b:free",
