@@ -86,3 +86,5 @@ def health_check():
     return {"status": "healthy",
             "model": "heart_disease_v1"}
 
+
+Note: predict endpoint contains a bug (returns round(predict_progression, 2) instead of the prediction variable) and get_interpretation is a placeholder — these should be fixed/refined.
